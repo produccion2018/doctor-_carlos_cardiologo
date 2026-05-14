@@ -7,18 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBtn =
   document.getElementById("menuBtn");
 
-  const mobileMenu =
-  document.getElementById("mobileMenu");
+  const navMenu =
+  document.getElementById("navMenu");
 
-  if(menuBtn && mobileMenu){
+  menuBtn.addEventListener("click", () => {
 
-    menuBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
 
-      mobileMenu.classList.toggle("active");
-
-    });
-
-  }
+  });
 
   // =========================
   // CONTADORES
@@ -30,53 +26,27 @@ document.addEventListener("DOMContentLoaded", () => {
   counters.forEach(counter => {
 
     const target =
-    Number(counter.dataset.target);
+    +counter.dataset.target;
 
-    const suffix =
-    counter.dataset.suffix || "";
-
-    const format =
-    counter.dataset.format || "";
-
-    let current = 0;
-
-    const increment =
-    target / 100;
+    let count = 0;
 
     const updateCounter = () => {
 
-      current += increment;
+      const increment =
+      target / 100;
 
-      if(current < target){
+      if(count < target){
 
-        if(format === "k"){
+        count += increment;
 
-          counter.innerText =
-          "+" +
-          (current / 1000).toFixed(1) +
-          "K";
+        counter.innerText =
+        Math.floor(count);
 
-        } else {
-
-          counter.innerText =
-          Math.floor(current) + suffix;
-
-        }
-
-        requestAnimationFrame(updateCounter);
+        setTimeout(updateCounter, 20);
 
       } else {
 
-        if(format === "k"){
-
-          counter.innerText = "+5K";
-
-        } else {
-
-          counter.innerText =
-          target + suffix;
-
-        }
+        counter.innerText = target;
 
       }
 
@@ -87,7 +57,94 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // FORM
+  // SERVICIOS
+  // =========================
+
+  const serviceButtons =
+  document.querySelectorAll(".service-btn");
+
+  serviceButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const card =
+      button.parentElement;
+
+      card.classList.toggle("active");
+
+      if(card.classList.contains("active")){
+
+        button.innerText =
+        "Ocultar";
+
+      } else {
+
+        button.innerText =
+        "Ver más";
+      }
+
+    });
+
+  });
+
+  // =========================
+  // MODAL
+  // =========================
+
+  const modal =
+  document.getElementById("modal");
+
+  const openButtons =
+  document.querySelectorAll(".open-modal");
+
+  const closeModal =
+  document.getElementById("closeModal");
+
+  openButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      modal.classList.add("active");
+
+    });
+
+  });
+
+  closeModal.addEventListener("click", () => {
+
+    modal.classList.remove("active");
+
+  });
+
+  window.addEventListener("click", (e) => {
+
+    if(e.target === modal){
+
+      modal.classList.remove("active");
+
+    }
+
+  });
+
+  // =========================
+  // SCROLL CONTACTO
+  // =========================
+
+  const contactBtn =
+  document.querySelector(".scroll-contact");
+
+  contactBtn.addEventListener("click", () => {
+
+    document
+    .getElementById("contacto")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+  });
+
+  // =========================
+  // FORMULARIO
   // =========================
 
   const form =
@@ -108,29 +165,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const messageInput =
   document.getElementById("message");
 
-  // =========================
-  // EMAIL
-  // =========================
-
-  function validateEmail(email){
-
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  }
-
-  // =========================
-  // ERROR
-  // =========================
-
   function showError(input, message){
 
     const error =
     input.parentElement.querySelector(".error");
 
-    error.textContent = message;
+    error.innerText = message;
 
-    input.style.borderColor = "crimson";
-
+    input.style.borderColor =
+    "crimson";
   }
 
   function clearError(input){
@@ -138,174 +181,153 @@ document.addEventListener("DOMContentLoaded", () => {
     const error =
     input.parentElement.querySelector(".error");
 
-    error.textContent = "";
+    error.innerText = "";
 
-    input.style.borderColor = "#d1d5db";
-
+    input.style.borderColor =
+    "#ddd";
   }
 
-  // =========================
-  // SUBMIT
-  // =========================
+  function validateEmail(email){
 
-  if(form){
-
-    form.addEventListener("submit", (e) => {
-
-      e.preventDefault();
-
-      let isValid = true;
-
-      // NOMBRE
-
-      if(nameInput.value.trim() === ""){
-
-        showError(
-          nameInput,
-          "Ingresa tu nombre"
-        );
-
-        isValid = false;
-
-      } else {
-
-        clearError(nameInput);
-
-      }
-
-      // EMAIL
-
-      if(emailInput.value.trim() === ""){
-
-        showError(
-          emailInput,
-          "Ingresa tu email"
-        );
-
-        isValid = false;
-
-      } else if(
-        !validateEmail(emailInput.value)
-      ){
-
-        showError(
-          emailInput,
-          "Correo inválido"
-        );
-
-        isValid = false;
-
-      } else {
-
-        clearError(emailInput);
-
-      }
-
-      // CONSULTA
-
-      if(serviceInput.value === ""){
-
-        showError(
-          serviceInput,
-          "Selecciona una consulta"
-        );
-
-        isValid = false;
-
-      } else {
-
-        clearError(serviceInput);
-
-      }
-
-      // MENSAJE
-
-      if(messageInput.value.trim().length < 10){
-
-        showError(
-          messageInput,
-          "Mínimo 10 caracteres"
-        );
-
-        isValid = false;
-
-      } else {
-
-        clearError(messageInput);
-
-      }
-
-      // SUCCESS
-
-      if(isValid){
-
-        const data = {
-
-          nombre:nameInput.value,
-
-          email:emailInput.value,
-
-          consulta:serviceInput.value,
-
-          mensaje:messageInput.value,
-
-          fecha:new Date().toLocaleString()
-
-        };
-
-        let consultas =
-        JSON.parse(
-          localStorage.getItem("consultasCardio")
-        ) || [];
-
-        consultas.push(data);
-
-        localStorage.setItem(
-          "consultasCardio",
-          JSON.stringify(consultas)
-        );
-
-        formMessage.innerHTML = `
-
-          <div class="success-message">
-
-            ✅ Consulta enviada correctamente
-
-          </div>
-
-        `;
-
-        form.reset();
-
-        setTimeout(() => {
-
-          formMessage.innerHTML = "";
-
-        }, 4000);
-
-      }
-
-    });
-
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(email);
   }
 
-  // =========================
-  // LIMPIAR ERRORES
-  // =========================
+  form.addEventListener("submit", (e) => {
 
-  [
-    nameInput,
-    emailInput,
-    serviceInput,
-    messageInput
+    e.preventDefault();
 
-  ].forEach(input => {
+    let valid = true;
 
-    input.addEventListener("input", () => {
+    // NOMBRE
 
-      clearError(input);
+    if(nameInput.value.trim() === ""){
 
-    });
+      showError(
+        nameInput,
+        "Ingresa tu nombre"
+      );
+
+      valid = false;
+
+    } else {
+
+      clearError(nameInput);
+
+    }
+
+    // EMAIL
+
+    if(emailInput.value.trim() === ""){
+
+      showError(
+        emailInput,
+        "Ingresa tu email"
+      );
+
+      valid = false;
+
+    } else if(
+      !validateEmail(emailInput.value)
+    ){
+
+      showError(
+        emailInput,
+        "Correo inválido"
+      );
+
+      valid = false;
+
+    } else {
+
+      clearError(emailInput);
+
+    }
+
+    // SERVICIO
+
+    if(serviceInput.value === ""){
+
+      showError(
+        serviceInput,
+        "Selecciona una consulta"
+      );
+
+      valid = false;
+
+    } else {
+
+      clearError(serviceInput);
+
+    }
+
+    // MENSAJE
+
+    if(messageInput.value.trim().length < 10){
+
+      showError(
+        messageInput,
+        "Mínimo 10 caracteres"
+      );
+
+      valid = false;
+
+    } else {
+
+      clearError(messageInput);
+
+    }
+
+    // SUCCESS
+
+    if(valid){
+
+      const data = {
+
+        nombre:nameInput.value,
+
+        email:emailInput.value,
+
+        consulta:serviceInput.value,
+
+        mensaje:messageInput.value,
+
+        fecha:new Date()
+        .toLocaleString()
+
+      };
+
+      let consultas =
+      JSON.parse(
+        localStorage.getItem("consultas")
+      ) || [];
+
+      consultas.push(data);
+
+      localStorage.setItem(
+        "consultas",
+        JSON.stringify(consultas)
+      );
+
+      formMessage.innerHTML = `
+
+        <div class="success-message">
+
+          ✅ Consulta enviada correctamente
+
+        </div>
+
+      `;
+
+      form.reset();
+
+      setTimeout(() => {
+
+        formMessage.innerHTML = "";
+
+      }, 4000);
+
+    }
 
   });
 

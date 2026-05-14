@@ -7,18 +7,7 @@
 
     <title>Dr. Carlos Gómez | Cardiología</title>
 
-    <!-- FAVICON -->
-
-    <link
-      rel="icon"
-      href="https://cdn-icons-png.flaticon.com/512/833/833472.png"
-    />
-
     <!-- GOOGLE FONTS -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -31,258 +20,285 @@
   </head>
 
   <body>
-    <!-- NAVBAR -->
+    <!-- =========================
+    NAVBAR
+    ========================= -->
 
     <header class="navbar">
-      <div class="container nav-content">
-        <div class="logo">
-          <div class="logo-circle"></div>
+      <div class="container nav-container">
+        <div class="logo">❤️ Dr. Carlos Gómez</div>
 
-          <span>Dr. Carlos Gómez</span>
-        </div>
+        <nav class="nav-menu" id="navMenu">
+          <a href="#inicio"> Inicio </a>
 
-        <nav class="nav-links">
-          <a href="#">Inicio</a>
+          <a href="#servicios"> Servicios </a>
 
-          <a href="#">Cardiología</a>
+          <a href="#doctor"> Doctor </a>
 
-          <a href="#">Electrocardiogramas</a>
-
-          <a href="#">Consultas</a>
-
-          <a href="#">Contacto</a>
+          <a href="#contacto"> Contacto </a>
         </nav>
 
-        <button class="btn-primary desktop-btn">Reservar Consulta</button>
-
-        <button class="mobile-menu-btn" id="menuBtn">☰</button>
-      </div>
-
-      <!-- MOBILE MENU -->
-
-      <div class="mobile-menu" id="mobileMenu">
-        <a href="#">Inicio</a>
-
-        <a href="#">Cardiología</a>
-
-        <a href="#">Electrocardiogramas</a>
-
-        <a href="#">Consultas</a>
-
-        <a href="#">Contacto</a>
+        <button class="menu-btn" id="menuBtn">☰</button>
       </div>
     </header>
 
-    <!-- HERO -->
+    <!-- =========================
+    HERO
+    ========================= -->
 
-    <section class="hero">
-      <div class="container hero-grid">
-        <!-- LEFT -->
+    <section class="hero" id="inicio">
+      <div class="container hero-container">
+        <!-- TEXTO -->
 
-        <div class="hero-content">
+        <div class="hero-text">
           <span class="tag"> Especialista en Cardiología </span>
 
-          <h1>
-            Cuidamos tu
-
-            <span>corazón</span>
-
-            con tecnología y precisión
-          </h1>
+          <h1>Cuidamos tu corazón con tecnología y precisión</h1>
 
           <p>
             Consultas cardiológicas, electrocardiogramas, chequeos preventivos y
-            seguimiento cardiovascular con atención médica profesional y humana.
+            atención médica personalizada.
           </p>
 
           <div class="hero-buttons">
-            <button class="btn-primary">Reservar Turno</button>
+            <button class="btn-primary open-modal">Reservar Consulta</button>
 
-            <button class="btn-secondary">Ver Servicios</button>
+            <button class="btn-secondary scroll-contact">Contactar</button>
           </div>
 
-          <!-- STATS -->
+          <!-- CONTADORES -->
 
-          <div class="hero-stats">
+          <div class="stats">
             <div class="stat-card">
-              <h3 class="counter" data-target="10" data-suffix="+">0</h3>
+              <h3 class="counter" data-target="10">0</h3>
 
               <p>Años de experiencia</p>
             </div>
 
             <div class="stat-card">
-              <h3 class="counter" data-target="5000" data-format="k">0</h3>
+              <h3 class="counter" data-target="5000">0</h3>
 
               <p>Pacientes atendidos</p>
             </div>
 
             <div class="stat-card">
-              <h3 class="counter" data-target="24" data-suffix="/7">0</h3>
+              <h3 class="counter" data-target="24">0</h3>
 
               <p>Seguimiento médico</p>
             </div>
           </div>
         </div>
 
-        <!-- RIGHT -->
+        <!-- IMAGEN -->
 
         <div class="hero-image">
-          <div class="floating-card top-card">❤️ Pacientes saludables</div>
-
-          <div class="floating-card bottom-card">🩺 Solicitar consulta</div>
-
           <img src="./img/doctor Carlos gomez.jpg" alt="Doctor Carlos Gómez" />
+
+          <div class="floating-card">❤️ Atención Profesional</div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- =========================
+    SERVICIOS
+    ========================= -->
 
-    <section class="about section">
+    <section class="services" id="servicios">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag"> Salud Cardiovascular </span>
+        <div class="section-title">
+          <span> Servicios Médicos </span>
 
-          <h2>Atención cardiológica moderna y personalizada</h2>
+          <h2>Especialidades Cardiológicas</h2>
         </div>
 
-        <div class="about-grid">
-          <div class="about-text">
-            <p>
-              Brindamos atención especializada en cardiología, prevención
-              cardiovascular y estudios clínicos utilizando tecnología moderna y
-              una experiencia médica cercana y profesional.
-            </p>
+        <div class="services-grid">
+          <!-- CARD -->
 
-            <button class="btn-secondary">Más Información</button>
+          <div class="service-card">
+            <div class="service-icon">❤️</div>
+
+            <h3>Cardiología</h3>
+
+            <p>Diagnóstico y tratamiento cardiovascular.</p>
+
+            <button class="service-btn">Ver más</button>
+
+            <div class="service-info">
+              Atención especializada en hipertensión, arritmias e insuficiencia
+              cardíaca.
+            </div>
           </div>
 
-          <div class="about-cards">
-            <div class="mini-card">
-              <h3>❤️ Cardiología</h3>
+          <!-- CARD -->
 
-              <p>Consultas y seguimiento cardiovascular profesional.</p>
+          <div class="service-card">
+            <div class="service-icon">🩺</div>
+
+            <h3>Electrocardiogramas</h3>
+
+            <p>Estudios cardíacos modernos.</p>
+
+            <button class="service-btn">Ver más</button>
+
+            <div class="service-info">
+              Estudios completos para evaluar el funcionamiento del corazón.
             </div>
+          </div>
 
-            <div class="mini-card blue-card">
-              <h3>🩺 Electrocardiogramas</h3>
+          <!-- CARD -->
 
-              <p>Estudios cardíacos rápidos y precisos.</p>
-            </div>
+          <div class="service-card">
+            <div class="service-icon">🏥</div>
 
-            <div class="mini-card">
-              <h3>🏥 Prevención</h3>
+            <h3>Chequeos Preventivos</h3>
 
-              <p>Chequeos preventivos y control integral de salud.</p>
+            <p>Prevención y control cardiovascular.</p>
+
+            <button class="service-btn">Ver más</button>
+
+            <div class="service-info">
+              Chequeos médicos completos para prevenir enfermedades
+              cardiovasculares.
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- =========================
+    DOCTOR
+    ========================= -->
 
-    <section class="contact section">
-      <div class="container contact-grid">
-        <!-- INFO -->
+    <section class="doctor" id="doctor">
+      <div class="container doctor-container">
+        <!-- IMAGEN -->
 
-        <div class="contact-info">
-          <span class="section-tag"> Contacto </span>
+        <div class="doctor-image">
+          <img src="./img/doctor Carlos gomez.jpg" alt="Doctor" />
+        </div>
 
-          <h2>Agenda tu consulta cardiológica</h2>
+        <!-- TEXTO -->
+
+        <div class="doctor-text">
+          <span class="tag"> Sobre el Doctor </span>
+
+          <h2>Más de 10 años cuidando pacientes</h2>
 
           <p>
-            Completa el formulario para solicitar tu turno con el Dr. Carlos
-            Gómez.
+            El Dr. Carlos Gómez combina experiencia médica, atención
+            personalizada y tecnología moderna para brindar diagnósticos
+            precisos.
           </p>
 
-          <div class="info-box">
-            <strong>Email</strong>
-
-            <span>cardiologia@email.com</span>
-          </div>
-
-          <div class="info-box">
-            <strong>Teléfono</strong>
-
-            <span>+54 11 5555-5555</span>
-          </div>
+          <button class="btn-primary open-modal">Solicitar Consulta</button>
         </div>
-
-        <!-- FORM -->
-
-        <form id="contactForm" class="contact-form">
-          <div class="input-group">
-            <label>Nombre</label>
-
-            <input type="text" id="name" placeholder="Tu nombre" />
-
-            <small class="error"></small>
-          </div>
-
-          <div class="input-group">
-            <label>Email</label>
-
-            <input type="email" id="email" placeholder="correo@email.com" />
-
-            <small class="error"></small>
-          </div>
-
-          <div class="input-group">
-            <label>Consulta</label>
-
-            <select id="service">
-              <option value="">Selecciona una opción</option>
-
-              <option>Consulta Cardiológica</option>
-
-              <option>Electrocardiograma</option>
-
-              <option>Chequeo Preventivo</option>
-
-              <option>Control Cardiovascular</option>
-            </select>
-
-            <small class="error"></small>
-          </div>
-
-          <div class="input-group">
-            <label>Mensaje</label>
-
-            <textarea
-              id="message"
-              rows="5"
-              placeholder="Escribe tu mensaje"
-            ></textarea>
-
-            <small class="error"></small>
-          </div>
-
-          <button type="submit" class="btn-primary full-btn">
-            Enviar Solicitud
-          </button>
-
-          <div id="formMessage"></div>
-        </form>
       </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- =========================
+    CONTACTO
+    ========================= -->
+
+    <section class="contact" id="contacto">
+      <div class="container">
+        <div class="contact-box">
+          <div class="section-title">
+            <span> Contacto </span>
+
+            <h2>Agenda tu consulta</h2>
+          </div>
+
+          <!-- FORMULARIO -->
+
+          <form id="contactForm">
+            <!-- NOMBRE -->
+
+            <div class="input-group">
+              <input type="text" id="name" placeholder="Nombre completo" />
+
+              <small class="error"></small>
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="input-group">
+              <input type="email" id="email" placeholder="Correo electrónico" />
+
+              <small class="error"></small>
+            </div>
+
+            <!-- SELECT -->
+
+            <div class="input-group">
+              <select id="service">
+                <option value="">Selecciona una consulta</option>
+
+                <option>Cardiología</option>
+
+                <option>Electrocardiograma</option>
+
+                <option>Chequeo Preventivo</option>
+              </select>
+
+              <small class="error"></small>
+            </div>
+
+            <!-- MENSAJE -->
+
+            <div class="input-group">
+              <textarea
+                id="message"
+                rows="5"
+                placeholder="Escribe tu mensaje"
+              ></textarea>
+
+              <small class="error"></small>
+            </div>
+
+            <!-- BOTON -->
+
+            <button type="submit" class="btn-primary full-btn">
+              Enviar Consulta
+            </button>
+
+            <!-- MENSAJE -->
+
+            <div id="formMessage"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+    MODAL
+    ========================= -->
+
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <button class="close-modal" id="closeModal">✖</button>
+
+        <h2>Consulta Reservada</h2>
+
+        <p>Gracias por comunicarte con el Dr. Carlos Gómez.</p>
+
+        <p>Un asistente se comunicará contigo pronto.</p>
+      </div>
+    </div>
+
+    <!-- =========================
+    FOOTER
+    ========================= -->
 
     <footer class="footer">
-      <div class="container footer-content">
+      <div class="container footer-container">
         <div>
           <h3>Dr. Carlos Gómez</h3>
 
-          <p>Especialista en Cardiología y salud cardiovascular.</p>
+          <p>Especialista en Cardiología</p>
         </div>
 
-        <div class="footer-links">
-          <a href="#">Privacidad</a>
-
-          <a href="#">Términos</a>
-
-          <a href="#">Soporte</a>
+        <div>
+          <p>© 2026 Todos los derechos reservados</p>
         </div>
       </div>
     </footer>
