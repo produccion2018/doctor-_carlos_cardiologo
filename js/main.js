@@ -1,333 +1,266 @@
-document.addEventListener("DOMContentLoaded", () => {
+// =========================
+// CONTADORES
+// =========================
 
-  // =========================
-  // MENU MOBILE
-  // =========================
+const counters =
+document.querySelectorAll(".counter");
 
-  const menuBtn =
-  document.getElementById("menuBtn");
+counters.forEach(counter => {
 
-  const navMenu =
-  document.getElementById("navMenu");
+  const target =
+  +counter.getAttribute("data-target");
 
-  menuBtn.addEventListener("click", () => {
+  let count = 0;
 
-    navMenu.classList.toggle("active");
+  const increment =
+  target / 100;
 
-  });
+  const updateCounter = () => {
 
-  // =========================
-  // CONTADORES
-  // =========================
+    count += increment;
 
-  const counters =
-  document.querySelectorAll(".counter");
+    if(count < target){
 
-  counters.forEach(counter => {
+      counter.innerText =
+      Math.floor(count);
 
-    const target =
-    +counter.dataset.target;
+      setTimeout(updateCounter, 20);
 
-    let count = 0;
+    } else {
 
-    const updateCounter = () => {
-
-      const increment =
-      target / 100;
-
-      if(count < target){
-
-        count += increment;
-
-        counter.innerText =
-        Math.floor(count);
-
-        setTimeout(updateCounter, 20);
-
-      } else {
-
-        counter.innerText = target;
-
-      }
-
-    };
-
-    updateCounter();
-
-  });
-
-  // =========================
-  // SERVICIOS
-  // =========================
-
-  const serviceButtons =
-  document.querySelectorAll(".service-btn");
-
-  serviceButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      const card =
-      button.parentElement;
-
-      card.classList.toggle("active");
-
-      if(card.classList.contains("active")){
-
-        button.innerText =
-        "Ocultar";
-
-      } else {
-
-        button.innerText =
-        "Ver más";
-      }
-
-    });
-
-  });
-
-  // =========================
-  // MODAL
-  // =========================
-
-  const modal =
-  document.getElementById("modal");
-
-  const openButtons =
-  document.querySelectorAll(".open-modal");
-
-  const closeModal =
-  document.getElementById("closeModal");
-
-  openButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      modal.classList.add("active");
-
-    });
-
-  });
-
-  closeModal.addEventListener("click", () => {
-
-    modal.classList.remove("active");
-
-  });
-
-  window.addEventListener("click", (e) => {
-
-    if(e.target === modal){
-
-      modal.classList.remove("active");
+      counter.innerText = target;
 
     }
 
-  });
+  };
 
-  // =========================
-  // SCROLL CONTACTO
-  // =========================
+  updateCounter();
 
-  const contactBtn =
-  document.querySelector(".scroll-contact");
+});
 
-  contactBtn.addEventListener("click", () => {
+// =========================
+// FORMULARIO
+// =========================
 
-    document
-    .getElementById("contacto")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
+const form =
+document.getElementById("contactForm");
 
-  });
+const formMessage =
+document.getElementById("formMessage");
 
-  // =========================
-  // FORMULARIO
-  // =========================
+form.addEventListener("submit", (e) => {
 
-  const form =
-  document.getElementById("contactForm");
+  e.preventDefault();
 
-  const formMessage =
-  document.getElementById("formMessage");
-
-  const nameInput =
+  const name =
   document.getElementById("name");
 
-  const emailInput =
+  const email =
   document.getElementById("email");
 
-  const serviceInput =
+  const service =
   document.getElementById("service");
 
-  const messageInput =
+  const message =
   document.getElementById("message");
 
-  function showError(input, message){
+  const errors =
+  document.querySelectorAll(".error");
 
-    const error =
-    input.parentElement.querySelector(".error");
-
-    error.innerText = message;
-
-    input.style.borderColor =
-    "crimson";
-  }
-
-  function clearError(input){
-
-    const error =
-    input.parentElement.querySelector(".error");
+  errors.forEach(error => {
 
     error.innerText = "";
 
-    input.style.borderColor =
-    "#ddd";
+  });
+
+  let valid = true;
+
+  // NOMBRE
+
+  if(name.value.trim() === ""){
+
+    errors[0].innerText =
+    "Ingresa tu nombre";
+
+    valid = false;
   }
 
-  function validateEmail(email){
+  // EMAIL
 
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    .test(email);
+  if(email.value.trim() === ""){
+
+    errors[1].innerText =
+    "Ingresa tu correo";
+
+    valid = false;
+
+  } else if(
+    !email.value.includes("@")
+  ){
+
+    errors[1].innerText =
+    "Correo inválido";
+
+    valid = false;
   }
 
-  form.addEventListener("submit", (e) => {
+  // SERVICIO
 
-    e.preventDefault();
+  if(service.value === ""){
 
-    let valid = true;
+    errors[2].innerText =
+    "Selecciona una consulta";
 
-    // NOMBRE
+    valid = false;
+  }
 
-    if(nameInput.value.trim() === ""){
+  // MENSAJE
 
-      showError(
-        nameInput,
-        "Ingresa tu nombre"
-      );
+  if(message.value.trim().length < 10){
 
-      valid = false;
+    errors[3].innerText =
+    "Mínimo 10 caracteres";
 
-    } else {
+    valid = false;
+  }
 
-      clearError(nameInput);
+  // EXITO
 
-    }
+  if(valid){
 
-    // EMAIL
+    const data = {
 
-    if(emailInput.value.trim() === ""){
+      nombre:name.value,
 
-      showError(
-        emailInput,
-        "Ingresa tu email"
-      );
+      email:email.value,
 
-      valid = false;
+      consulta:service.value,
 
-    } else if(
-      !validateEmail(emailInput.value)
-    ){
+      mensaje:message.value
 
-      showError(
-        emailInput,
-        "Correo inválido"
-      );
+    };
 
-      valid = false;
+    let consultas =
+    JSON.parse(
+      localStorage.getItem("consultas")
+    ) || [];
 
-    } else {
+    consultas.push(data);
 
-      clearError(emailInput);
+    localStorage.setItem(
+      "consultas",
+      JSON.stringify(consultas)
+    );
 
-    }
+    formMessage.innerHTML = `
 
-    // SERVICIO
+      <div class="success-message">
+        ✅ Consulta enviada correctamente
+      </div>
 
-    if(serviceInput.value === ""){
+    `;
 
-      showError(
-        serviceInput,
-        "Selecciona una consulta"
-      );
+    form.reset();
 
-      valid = false;
+    setTimeout(() => {
 
-    } else {
+      formMessage.innerHTML = "";
 
-      clearError(serviceInput);
+    }, 4000);
 
-    }
+  }
 
-    // MENSAJE
+});
 
-    if(messageInput.value.trim().length < 10){
+// =========================
+// MODAL
+// =========================
 
-      showError(
-        messageInput,
-        "Mínimo 10 caracteres"
-      );
+const modal =
+document.getElementById("customModal");
 
-      valid = false;
+const closeModal =
+document.getElementById("closeModal");
 
-    } else {
+const heroBtn =
+document.getElementById("heroBtn");
 
-      clearError(messageInput);
+const openFormBtn =
+document.getElementById("openFormBtn");
 
-    }
+const doctorBtn =
+document.querySelector(".doctor-btn");
 
-    // SUCCESS
+// ABRIR MODAL
 
-    if(valid){
+[
+  heroBtn,
+  openFormBtn,
+  doctorBtn
 
-      const data = {
+].forEach(btn => {
 
-        nombre:nameInput.value,
+  btn.addEventListener("click", () => {
 
-        email:emailInput.value,
+    modal.classList.add("active");
 
-        consulta:serviceInput.value,
+  });
 
-        mensaje:messageInput.value,
+});
 
-        fecha:new Date()
-        .toLocaleString()
+// CERRAR
 
-      };
+closeModal.addEventListener("click", () => {
 
-      let consultas =
-      JSON.parse(
-        localStorage.getItem("consultas")
-      ) || [];
+  modal.classList.remove("active");
 
-      consultas.push(data);
+});
 
-      localStorage.setItem(
-        "consultas",
-        JSON.stringify(consultas)
-      );
+// CERRAR AFUERA
 
-      formMessage.innerHTML = `
+window.addEventListener("click", (e) => {
 
-        <div class="success-message">
+  if(e.target === modal){
 
-          ✅ Consulta enviada correctamente
+    modal.classList.remove("active");
 
-        </div>
+  }
 
-      `;
+});
 
-      form.reset();
+// =========================
+// BOTON SERVICIOS
+// =========================
 
-      setTimeout(() => {
+const servicesBtn =
+document.getElementById("servicesBtn");
 
-        formMessage.innerHTML = "";
+servicesBtn.addEventListener("click", () => {
 
-      }, 4000);
+  document
+  .getElementById("servicios")
+  .scrollIntoView({
 
-    }
+    behavior:"smooth"
+
+  });
+
+});
+
+// =========================
+// BOTONES SERVICIOS
+// =========================
+
+const serviceButtons =
+document.querySelectorAll(".service-btn");
+
+serviceButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    alert(
+      "Servicio disponible próximamente."
+    );
 
   });
 
